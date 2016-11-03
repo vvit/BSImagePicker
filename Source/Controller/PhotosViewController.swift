@@ -50,6 +50,35 @@ extension PhotosViewController {
         super.viewDidLoad()
         collectionView?.register(nib: UINib(nibName: "PhotoCell", bundle: Bundle.imagePicker), for: PhotoCell.self)
         collectionView?.backgroundColor = UIColor.clear
+
+        // Add long press recognizer
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(collectionViewLongpressed(sender:)))
+        longPressRecognizer.minimumPressDuration = 0.5
+        collectionView?.addGestureRecognizer(longPressRecognizer)
+    }
+}
+
+// MARK: Gesture recognizer
+extension PhotosViewController {
+    func collectionViewLongpressed(sender: UILongPressGestureRecognizer) {
+        guard sender.state == .began else { return }
+
+        // Disable recognizer while we are figuring out location and pushing preview
+        sender.isEnabled = false
+        collectionView?.isUserInteractionEnabled = false
+
+        // Calculate which index path long press came from
+        let location = sender.location(in: collectionView)
+        let indexPath = collectionView?.indexPathForItem(at: location)
+
+        // Present preview
+        let vc = PreviewViewController.instantiateFromStoryboard()
+        vc.album = album
+        present(vc, animated: true, completion: nil)
+
+        // Re-enable recognizer, after animation is done
+        sender.isEnabled = true
+        self.collectionView?.isUserInteractionEnabled = true
     }
 }
 

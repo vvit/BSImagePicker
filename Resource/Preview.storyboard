@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jem-Ff-HCV">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Preview View Controller-->
+        <scene sceneID="5gK-Yc-G3w">
+            <objects>
+                <viewController id="jem-Ff-HCV" customClass="PreviewViewController" customModule="ImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AKz-KA-svZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="DZh-PV-y1d"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QBt-Cs-5ME">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ICi-Ou-9MN">
+                                <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="luO-G9-aFY"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fcn-IN-N11">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NKW-hu-3h7">
+                                <rect key="frame" x="0.0" y="20" width="375" height="599"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aKR-Zf-7wA">
+                                    <size key="itemSize" width="248" height="221"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ICi-Ou-9MN" firstAttribute="top" secondItem="NKW-hu-3h7" secondAttribute="bottom" id="3cl-ML-8FM"/>
+                            <constraint firstItem="NKW-hu-3h7" firstAttribute="top" secondItem="AKz-KA-svZ" secondAttribute="bottom" id="4kS-I1-pcd"/>
+                            <constraint firstAttribute="trailing" secondItem="ICi-Ou-9MN" secondAttribute="trailing" id="Cpt-YI-vHA"/>
+                            <constraint firstItem="ICi-Ou-9MN" firstAttribute="leading" secondItem="QBt-Cs-5ME" secondAttribute="leading" id="DUu-jC-Psb"/>
+                            <constraint firstItem="DZh-PV-y1d" firstAttribute="top" secondItem="ICi-Ou-9MN" secondAttribute="bottom" id="T5V-go-X24"/>
+                            <constraint firstItem="NKW-hu-3h7" firstAttribute="leading" secondItem="QBt-Cs-5ME" secondAttribute="leading" id="rys-qA-eKQ"/>
+                            <constraint firstAttribute="trailing" secondItem="NKW-hu-3h7" secondAttribute="trailing" id="uhm-mj-N9t"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="overviewCollectionView" destination="ICi-Ou-9MN" id="rmh-RS-bGi"/>
+                        <outlet property="overviewCollectionViewHeightConstraint" destination="luO-G9-aFY" id="DJZ-yO-H3Q"/>
+                        <outlet property="overviewHeightConstraint" destination="luO-G9-aFY" id="iM9-a6-tL8"/>
+                        <outlet property="previewCollectionView" destination="NKW-hu-3h7" id="U4D-Xn-BKb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zjw-SG-IJt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-119.2" y="125.4872563718141"/>
+        </scene>
+    </scenes>
+</document>
