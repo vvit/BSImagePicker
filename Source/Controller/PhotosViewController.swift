@@ -48,12 +48,15 @@ class PhotosViewController: UICollectionViewController {
 extension PhotosViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = " " // This is to get an "empty" back button in preview
+
         collectionView?.register(nib: UINib(nibName: "PhotoCell", bundle: Bundle.imagePicker), for: PhotoCell.self)
         collectionView?.backgroundColor = UIColor.clear
 
         // Add long press recognizer
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(collectionViewLongpressed(sender:)))
-        longPressRecognizer.minimumPressDuration = 0.5
+        longPressRecognizer.minimumPressDuration = 0.3
+        longPressRecognizer.cancelsTouchesInView = true
         collectionView?.addGestureRecognizer(longPressRecognizer)
     }
 }

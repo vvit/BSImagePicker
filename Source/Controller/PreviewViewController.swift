@@ -24,32 +24,18 @@ import UIKit
 
 class PreviewViewController: UIViewController {
     @IBOutlet var overviewHeightConstraint: NSLayoutConstraint!
-    
+    @IBOutlet var previewCollectionView: UICollectionView!
+    @IBOutlet var overviewCollectionView: UICollectionView!
+    @IBOutlet var overviewCollectionViewHeightConstraint: NSLayoutConstraint!
+
     var album: Album?
 
     fileprivate var fullscreen: Bool = false {
         didSet {
             if fullscreen == oldValue { return }
-            UIView.animate(withDuration: 0.3) { [weak self] in
-                self?.toggleNavigationBar()
-                self?.toggleStatusBar()
-                self?.toggleBackgroundColor()
-                self?.toggleOverview()
-            }
+            toggleFullscreen()
         }
     }
-
-    @IBOutlet var previewCollectionView: UICollectionView!
-    private var previewCollectionViewLayout: UICollectionViewFlowLayout {
-        return previewCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-    }
-
-    @IBOutlet var overviewCollectionView: UICollectionView!
-    private var overviewCollectionViewLayout: UICollectionViewFlowLayout {
-        return overviewCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-    }
-
-    @IBOutlet var overviewCollectionViewHeightConstraint: NSLayoutConstraint!
     
     static func instantiateFromStoryboard() -> PreviewViewController {
         return UIStoryboard(name: "Preview", bundle: Bundle.imagePicker).instantiateInitialViewController() as! PreviewViewController
@@ -95,15 +81,26 @@ class PreviewViewController: UIViewController {
         guard let indexPath = previewCollectionView.indexPathForItem(at: location) else { return }
         guard let cell = previewCollectionView.cellForItem(at: indexPath) as? PreviewCell else { return }
 
-        if cell.scrollView.zoomScale != 2 {
-            cell.scrollView.zoomScale = 2
-            fullscreen = true
+        if cell.scrollView.zoomScale != 1 {
+            cell.scrollView.setZoomScale(1, animated: true)
         } else {
-            cell.scrollView.zoomScale = 1
+            fullscreen = true
+            cell.scrollView.setZoomScale(2, animated: true)
         }
     }
 
-    // MARK: 
+    // MARK: Helpers for toggling fullscreen
+    func toggleFullscreen() {
+        toggleOverview()
+
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.view.layoutIfNeeded()
+            self?.toggleNavigationBar()
+            self?.toggleStatusBar()
+            self?.toggleBackgroundColor()
+        }
+    }
+
     func toggleNavigationBar() {
         navigationController?.setNavigationBarHidden(fullscreen, animated: true)
     }
