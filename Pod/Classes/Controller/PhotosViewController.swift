@@ -240,6 +240,8 @@ final class PhotosViewController : UICollectionViewController {
                 }
             }
         }
+        
+        navigationController?.navigationBar.setNeedsLayout()
     }
     
     // Check if a give UIButton is the right UIBarButtonItem in the navigation bar
